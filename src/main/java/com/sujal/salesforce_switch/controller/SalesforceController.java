@@ -61,7 +61,10 @@ public class SalesforceController {
     	String url =
     	        instanceUrl +
     	        "/services/data/v60.0/tooling/query?q=" +
-    	        query;
+    	        java.net.URLEncoder.encode(
+    	                query,
+    	                java.nio.charset.StandardCharsets.UTF_8
+    	        );
 
         HttpHeaders headers = new HttpHeaders();
 

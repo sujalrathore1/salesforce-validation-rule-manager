@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salesforce Validation Rule Manager</title>
+</head>
+<body>
+
+    <h1>Salesforce Validation Rule Manager</h1>
+
+    <button onclick="login()">Login with Salesforce</button>
+
+    <br><br>
+
+    <button onclick="getToken()">Get Access Token</button>
+
+    <p id="token"></p>
+
+    <script>
+
+        function login() {
+            window.location.href = "/login";
+        }
+
+        function getToken() {
+
+            const hash = window.location.hash;
+
+            const params = new URLSearchParams(hash.substring(1));
+
+            const token = params.get("access_token");
+
+            document.getElementById("token").innerText =
+                "Access Token: " + token;
+
+            console.log(token);
+        }
+
+    </script>
+
+</body>
+</html>

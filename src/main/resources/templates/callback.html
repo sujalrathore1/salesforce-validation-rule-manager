@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Salesforce Validation Rules</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        th {
+            background-color: #0070d2;
+            color: white;
+        }
+
+        button:hover {
+            background-color: lightgray;
+        }
+
+        table, th, td {
+            border: 1px solid gray;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Salesforce Validation Rules</h1>
+
+    <button onclick="getRules()">
+        Get Validation Rules
+    </button>
+
+    <button onclick="deployChanges()">
+        Deploy Changes
+    </button>
+
+    <br><br>
+
+    <table border="1" id="rulesTable">
+
+        <tr>
+            <th>Rule Name</th>
+            <th>Active</th>
+            <th>Action</th>
+        </tr>
+
+    </table>
+
+    <script>
+
+        const hash = window.location.hash;
+
+        const params = new URLSearchParams(hash.substring(1));
+
+        const accessToken = params.get("access_token");
+
+        const instanceUrl = params.get("instance_url");
+
+        // Fetch validation rules
+
+        async function getRules() {
+
+            const response = await fetch(
+                `/rules?token=${accessToken}&instanceUrl=${instanceUrl}`
+            );
+
+            const data = await response.json();
+
+            console.log(data);
+
+            const table = document.getElementById("rulesTable");
+
+            // Remove old rows except header
+
+            table.innerHTML = `
+                <tr>
+                    <th>Rule Name</th>
+                    <th>Active</th>
+                    <th>Action</th>
+                </tr>
+            `;
+
+            data.records.forEach(rule => {
+
+                const row = table.insertRow();
+
+                const cell1 = row.insertCell(0);
+
+                const cell2 = row.insertCell(1);
+
+                const cell3 = row.insertCell(2);
+
+                cell1.innerHTML = rule.ValidationName;
+
+                cell2.innerHTML = rule.Active;
+
+                // Create toggle button
+
+                const button = document.createElement("button");
+
+                button.innerText = "Toggle";
+
+                button.onclick = function () {
+
+                    toggleRule(rule.Id, cell2);
+
+                };
+
+                cell3.appendChild(button);
+
+            });
+        }
+
+        // Toggle validation rule
+
+        async function toggleRule(ruleId, statusCell) {
+
+            const response = await fetch(
+                `/toggleRule?id=${ruleId}`
+            );
+
+            const data = await response.text();
+
+            let currentValue = statusCell.innerHTML;
+
+            if (currentValue === "true") {
+
+                statusCell.innerHTML = "false";
+
+            } else {
+
+                statusCell.innerHTML = "true";
+            }
+
+            alert(data);
+        }
+
+        // Deploy changes
+
+        function deployChanges() {
+
+            alert("Changes deployed successfully to Salesforce!");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

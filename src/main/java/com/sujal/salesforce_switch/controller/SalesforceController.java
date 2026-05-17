@@ -22,7 +22,8 @@ public class SalesforceController {
 			private final String CLIENT_SECRET =
 			System.getenv("CLIENT_SECRET");
 
-    private final String REDIRECT_URI =  "https://salesforce-validation-rule-manager-3vyu.onrender.com";
+			private final String REDIRECT_URI =
+					"https://salesforce-validation-rule-manager-3vyu.onrender.com/callback";
 
     @Autowired
     private RestTemplate restTemplate;

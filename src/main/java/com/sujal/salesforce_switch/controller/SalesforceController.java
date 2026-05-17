@@ -16,11 +16,11 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class SalesforceController {
 
-    private final String CLIENT_ID = "3MVG97L7PWbPq6UzRJKYJW4OBAFa0N5_joArPiEpZi2M65mDeQETh4iZP4fkMei3b0LRW5fYsLWELpLx2Nu4c";
+	private final String CLIENT_ID = "YOUR_CLIENT_ID";
 
-    private final String CLIENT_SECRET = "2B5382619168BEE5C91F48F94E2182488A28AD4042BBE8B83519F81E80E1E28D";
+	private final String CLIENT_SECRET = "YOUR_CLIENT_SECRET";
 
-    private final String REDIRECT_URI = "http://localhost:8080/callback";
+    private final String REDIRECT_URI =  "https://salesforce-validation-rule-manager-3vyu.onrender.com";
 
     @Autowired
     private RestTemplate restTemplate;

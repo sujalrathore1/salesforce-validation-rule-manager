@@ -16,9 +16,11 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class SalesforceController {
 
-	private final String CLIENT_ID = "YOUR_CLIENT_ID";
+	private final String CLIENT_ID =
+			System.getenv("CLIENT_ID");
 
-	private final String CLIENT_SECRET = "YOUR_CLIENT_SECRET";
+			private final String CLIENT_SECRET =
+			System.getenv("CLIENT_SECRET");
 
     private final String REDIRECT_URI =  "https://salesforce-validation-rule-manager-3vyu.onrender.com";
 

@@ -51,43 +51,34 @@ public class SalesforceController {
     }
     
     @GetMapping("/rules")
-    public ResponseEntity<?> getRules(
+    public ResponseEntity<String> getRules(
             @RequestParam("token") String accessToken,
             @RequestParam("instanceUrl") String instanceUrl) {
 
-        try {
+        String query =
+                "SELECT Id, ValidationName, Active FROM ValidationRule LIMIT 10";
 
-            String query =
-                    "SELECT Id, ValidationName, Active FROM ValidationRule LIMIT 10";
+        String url =
+                instanceUrl +
+                "/services/data/v60.0/tooling/query?q=" +
+                query.replace(" ", "+");
 
-            String url =
-                    instanceUrl +
-                    "/services/data/v60.0/tooling/query?q=" +
-                    query.replace(" ", "+");
+        HttpHeaders headers = new HttpHeaders();
 
-            HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + accessToken);
 
-            headers.set("Authorization", "Bearer " + accessToken);
+        HttpEntity<String> entity =
+                new HttpEntity<>(headers);
 
-            HttpEntity<String> entity =
-                    new HttpEntity<>(headers);
+        ResponseEntity<String> response =
+                restTemplate.exchange(
+                        url,
+                        HttpMethod.GET,
+                        entity,
+                        String.class
+                );
 
-            ResponseEntity<String> response =
-                    restTemplate.exchange(
-                            url,
-                            HttpMethod.GET,
-                            entity,
-                            String.class
-                    );
-
-            return response;
-
-        } catch (Exception e) {
-
-            return ResponseEntity
-                    .status(500)
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok(response.getBody());
     }
     
     @GetMapping("/toggleRule")

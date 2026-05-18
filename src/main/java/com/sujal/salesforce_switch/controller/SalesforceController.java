@@ -51,39 +51,46 @@ public class SalesforceController {
     }
     
     @GetMapping("/rules")
-    public ResponseEntity<String> getRules(
+    public ResponseEntity<?> getRules(
             @RequestParam("token") String accessToken,
             @RequestParam("instanceUrl") String instanceUrl) {
 
-    	String query =
-    	        "SELECT Id, ValidationName, Active FROM ValidationRule LIMIT 10";
+        try {
 
-    	String url =
-    	        instanceUrl +
-    	        "/services/data/v60.0/tooling/query?q=" +
-    	        java.net.URLEncoder.encode(
-    	                query,
-    	                java.nio.charset.StandardCharsets.UTF_8
-    	        );
+            String query =
+                    "SELECT Id, ValidationName, Active FROM ValidationRule LIMIT 10";
 
-        HttpHeaders headers = new HttpHeaders();
+            String url =
+                    instanceUrl +
+                    "/services/data/v60.0/tooling/query?q=" +
+                    java.net.URLEncoder.encode(
+                            query,
+                            java.nio.charset.StandardCharsets.UTF_8
+                    );
 
-        headers.set("Authorization", "Bearer " + accessToken);
+            HttpHeaders headers = new HttpHeaders();
 
-        HttpEntity<String> entity =
-                new HttpEntity<>(headers);
+            headers.set("Authorization", "Bearer " + accessToken);
 
-        ResponseEntity<String> response =
-                restTemplate.exchange(
-                        url,
-                        HttpMethod.GET,
-                        entity,
-                        String.class
-                );
+            HttpEntity<String> entity =
+                    new HttpEntity<>(headers);
 
-        return response;
-        
-       
+            ResponseEntity<String> response =
+                    restTemplate.exchange(
+                            url,
+                            HttpMethod.GET,
+                            entity,
+                            String.class
+                    );
+
+            return response;
+
+        } catch (Exception e) {
+
+            return ResponseEntity
+                    .status(500)
+                    .body(e.getMessage());
+        }
     }
     
     @GetMapping("/toggleRule")

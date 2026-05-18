@@ -85,9 +85,11 @@
                 `/rules?token=${accessToken}&instanceUrl=${instanceUrl}`
             );
 
-            const data = await response.json();
+            const text = await response.text();
 
-            console.log(data);
+            console.log(text);
+
+            const data = JSON.parse(text);
 
             const table = document.getElementById("rulesTable");
 

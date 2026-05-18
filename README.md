@@ -43,7 +43,14 @@ https://github.com/sujalrathore1/salesforce-validation-rule-manager
 
 ## Screenshots
 
-(Add screenshots here later)
+### Login Page
+![Login Page](screenshots/login-page.png)
+
+### Validation Rules Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Live Deployed Application
+![Live App](screenshots/live-app.png)
 
 ## Author
 

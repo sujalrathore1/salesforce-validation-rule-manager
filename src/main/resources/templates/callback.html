@@ -4,48 +4,105 @@
 <head>
     <title>Salesforce Validation Rules</title>
 
-    <style>
+   <style>
 
-        body {
-            font-family: Arial;
-            padding: 20px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #141e30, #243b55);
+    margin: 0;
+    padding: 30px;
+    color: white;
+}
 
-        table {
-            border-collapse: collapse;
-            width: 70%;
-        }
+.container {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    color: black;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+}
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0070d2;
+}
 
-        button {
-            padding: 8px 15px;
-            cursor: pointer;
-        }
+.top-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
 
-        th {
-            background-color: #0070d2;
-            color: white;
-        }
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #0070d2;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        button:hover {
-            background-color: lightgray;
-        }
+button:hover {
+    background-color: #005fb2;
+    transform: scale(1.05);
+}
 
-        table, th, td {
-            border: 1px solid gray;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 10px;
+}
 
-    </style>
+th {
+    background-color: #0070d2;
+    color: white;
+    padding: 15px;
+}
+
+td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+}
+
+.active-badge {
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.inactive-badge {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+</style>
 
 </head>
 
 <body>
 
-    <h1>Salesforce Validation Rules</h1>
+	<div class="container">
+	
+	<h1>Salesforce Validation Rule Manager</h1>
+
+    <div class="top-buttons">
 
     <button onclick="getRules()">
         Get Validation Rules
@@ -55,7 +112,9 @@
         Deploy Changes
     </button>
 
-    <br><br>
+</div>
+
+    
 
     <table border="1" id="rulesTable">
 
@@ -115,7 +174,16 @@
 
                 cell1.innerHTML = rule.ValidationName;
 
-                cell2.innerHTML = rule.Active;
+                if(rule.Active){
+
+                    cell2.innerHTML =
+                        `<span class="active-badge">Active</span>`;
+
+                } else {
+
+                    cell2.innerHTML =
+                        `<span class="inactive-badge">Inactive</span>`;
+                }
 
                 // Create toggle button
 
@@ -167,6 +235,8 @@
         }
 
     </script>
+    
+    </div>
 
 </body>
 

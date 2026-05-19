@@ -1,41 +1,105 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <title>Salesforce Validation Rule Manager</title>
+
+    <style>
+
+        body {
+
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(to right, #141e30, #243b55);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+        }
+
+        .container {
+
+            background: white;
+            padding: 50px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+
+            width: 450px;
+        }
+
+        h1 {
+
+            color: #0070d2;
+
+            margin-bottom: 30px;
+        }
+
+        p {
+
+            color: #555;
+
+            margin-bottom: 30px;
+
+            font-size: 16px;
+        }
+
+        button {
+
+            padding: 12px 25px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background-color: #0070d2;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+
+            background-color: #005fb2;
+
+            transform: scale(1.05);
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <h1>Salesforce Validation Rule Manager</h1>
+    <div class="container">
 
-    <button onclick="login()">Login with Salesforce</button>
+        <h1>Salesforce Validation Rule Manager</h1>
 
-    <br><br>
+        <p>
+            Manage Salesforce Validation Rules dynamically using OAuth 2.0 and Tooling API.
+        </p>
 
-    <button onclick="getToken()">Get Access Token</button>
+        <button onclick="window.location.href='/login'">
 
-    <p id="token"></p>
+            Login with Salesforce
 
-    <script>
+        </button>
 
-        function login() {
-            window.location.href = "/login";
-        }
-
-        function getToken() {
-
-            const hash = window.location.hash;
-
-            const params = new URLSearchParams(hash.substring(1));
-
-            const token = params.get("access_token");
-
-            document.getElementById("token").innerText =
-                "Access Token: " + token;
-
-            console.log(token);
-        }
-
-    </script>
+    </div>
 
 </body>
+
 </html>
